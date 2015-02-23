@@ -5,3 +5,8 @@ nbproject/
 manifest.mf
 magarena-fx/release
 magarena-headless/release
+.hgtags
+magarena-swing/launch4j
+magarena-swing/lib
+magarena-swing/Magarena.app
+magarena-swing/release

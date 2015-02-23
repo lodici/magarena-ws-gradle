@@ -1,0 +1,90 @@
+<project name="Magarena" basedir="." default="jar">
+  <description>
+    ANT Build file for Magarena.
+  </description>
+  <property environment="env"/>
+  <property name="debuglevel" value="source,lines,vars"/>
+  <property name="target" value="1.7"/>
+  <property name="source" value="1.7"/>
+  <property name="lib" value="release/lib" />
+  <property name="groovy-version" value="2.3.4" />
+  
+  <path id="classpath">
+      <fileset dir="${lib}">
+      <include name="**/*.jar" />
+      </fileset>
+  </path>
+  
+ <taskdef name="bundleapp" 		
+ 	classname="com.oracle.appbundler.AppBundlerTask" 		
+ 	classpath="lib/appbundler-1.0.jar" />
+	
+  <!-- deps - Download dependencies -->
+  <target name="deps" unless="skip.download">
+      <echo message="downloading groovy to ${lib}"/>
+      <get src="http://search.maven.org/remotecontent?filepath=org/codehaus/groovy/groovy-all/${groovy-version}/groovy-all-${groovy-version}-indy.jar" 
+           dest="${lib}/groovy-all-${groovy-version}.jar" 
+           skipexisting="true" />
+      <echo message="downloading MigLayout to ${lib}"/>
+      <get src="http://repo1.maven.org/maven2/com/miglayout/miglayout-core/4.2/miglayout-core-4.2.jar" 
+           dest="${lib}/miglayout-core-4.2.jar" 
+           skipexisting="true" />
+      <get src="http://repo1.maven.org/maven2/com/miglayout/miglayout-swing/4.2/miglayout-swing-4.2.jar" 
+           dest="${lib}/miglayout-swing-4.2.jar" 
+           skipexisting="true" />
+      <echo message="downloading Apache Commons IO to ${lib}"/>
+      <get src="http://repo1.maven.org/maven2/commons-io/commons-io/2.4/commons-io-2.4.jar" 
+         dest="${lib}/commons-io-2.4.jar" 
+         skipexisting="true" />
+      <echo message="downloading Trident animation library to ${lib}"/>     
+      <get src="http://repo1.maven.org/maven2/org/pushingpixels/trident/1.3/trident-1.3.jar" 
+         dest="${lib}/trident-1.3.jar" 
+         skipexisting="true" />
+      <echo message="downloading java json library to ${lib}"/>     
+      <get src="http://repo1.maven.org/maven2/org/json/json/20140107/json-20140107.jar" 
+         dest="${lib}/json-20140107.jar" 
+         skipexisting="true" />
+  </target>
+
+  <!-- init - Create temporary directory to build the program -->
+  <target name="init">
+      <mkdir dir="build"/>
+      <mkdir dir="${lib}"/>
+  </target>
+
+  <!-- clean - Remove temporary directory -->
+  <target name="clean">
+    <delete dir="build"/>
+  </target>
+
+  <!-- build - Compile sources and copy resources to build directory -->
+  <target depends="init,deps" name="build">
+    <javac includeantruntime="false" debug="true" debuglevel="${debuglevel}" encoding="UTF-8" destdir="build" source="${source}" target="${target}">
+        <src path="src"/>
+        <compilerarg value="-Xlint"/>
+        <classpath refid="classpath" />
+    </javac>
+    <copy includeemptydirs="false" todir="build">
+      <fileset dir="resources">
+        <exclude name="**/.svn"/>
+      </fileset>
+    </copy>
+  </target>
+
+  <!-- jar (default target) - Create .jar file -->
+  <target depends="build" name="jar">
+    <jar destfile="release/Magarena.jar" basedir="build" includes="**/*.*">
+      <manifest>
+        <attribute name="Main-Class" value="magic.MagicMain" />
+        <attribute name="SplashScreen-Image" value="magic/data/textures/splash.png" />
+        <attribute name="Class-Path" value="lib/groovy-all-${groovy-version}.jar lib/json-20140107.jar lib/miglayout-core-4.2.jar lib/miglayout-swing-4.2.jar lib/commons-io-2.4.jar lib/trident-1.3.jar" />
+      </manifest>
+    </jar>
+  </target>
+
+  <!-- javadoc -  Generate Javadoc -->
+  <target name="javadoc">
+    <javadoc sourcepath="src" destdir="javadoc" />
+  </target>
+
+</project>
