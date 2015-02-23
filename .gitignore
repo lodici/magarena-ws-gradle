@@ -4,3 +4,4 @@ dist/
 nbproject/
 manifest.mf
 magarena-fx/release
+magarena-headless/release
