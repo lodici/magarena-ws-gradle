@@ -70,5 +70,9 @@
     nbproject/build-impl.xml file. 
 
     -->
+    <target name="-post-jar">
+        <echo message="Copying magarena-core.jar to D:\_DATA\Java\NetBeansProjects\magarena-fx\release\lib..." />        
+        <copy file="${dist.dir}/magarena-core.jar" tofile="D:\_DATA\Java\NetBeansProjects\magarena-fx\release\lib\magarena-core.jar"/>
+    </target>
         
 </project>
