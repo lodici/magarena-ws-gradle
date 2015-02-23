@@ -14,6 +14,7 @@ import magfx.ui.ScreenController;
 import magfx.ui.StartupProgressReporter;
 import magfx.utility.MagicResources;
 import magic.data.CardDefinitions;
+import magic.data.GeneralConfig;
 import magic.data.UnimplementedParser;
 import magic.exception.handler.ConsoleExceptionHandler;
 import magic.utility.MagicSystem;
@@ -111,7 +112,7 @@ public class Main extends Application {
         // must load config here otherwise annotated card image theme-specifc
         // icons are not loaded before the AbilityIcon class is initialized
         // and you end up with the default icons instead.
-        magic.data.GeneralConfig.getInstance().load();
+        GeneralConfig.getInstance().load();
 
         initialize();
         
