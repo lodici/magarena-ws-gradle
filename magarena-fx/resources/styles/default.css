@@ -1,0 +1,39 @@
+@font-face {
+    font-family: 'Baldur';
+    src: url('Baldur.ttf');
+}
+@font-face {
+    font-family: 'Beleren';
+    src: url('beleren-bold-webfont.ttf');
+}
+
+/*.text {
+    -fx-font-family: 'Baldur';
+}*/
+
+.screenCaption {
+/*    -fx-border-color: yellow;
+    -fx-border-style: dashed;*/
+    -fx-font-family: 'Beleren';
+    -fx-font-size: 40px
+}
+
+/*
+    Style from https://blogs.oracle.com/acaicedo/entry/managing_multiple_screens_in_javafx
+*/
+.menuButton {
+    -fx-background-radius: 10;
+    -fx-background-color: radial-gradient(radius 100%, derive(-fx-base,-60%), derive(-fx-base,-80%)), derive(-fx-base,-40%), radial-gradient(radius 100%, derive(-fx-base,-60%), derive(-fx-base,-80%));
+    -fx-background-insets: 0,1,2;
+    -fx-font-family: 'Baldur';    
+    -fx-font-size: 24px;
+    -fx-cursor: hand;
+    -fx-text-fill: white;     
+}
+.menuButton:hover {
+    -fx-text-fill: #ffff66;     
+}
+.menuButton:pressed {
+    -fx-text-fill: yellow;
+}
+
