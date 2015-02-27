@@ -11,3 +11,6 @@ magarena-swing/lib
 magarena-swing/Magarena.app
 magarena-swing/release
 */target/
+*.7z
+magarena-fx/data/mods/
+magarena-fx/data/snapshot.dat
