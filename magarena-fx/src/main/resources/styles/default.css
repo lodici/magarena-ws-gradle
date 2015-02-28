@@ -18,6 +18,17 @@
     -fx-font-size: 40px
 }
 
+.debugBorder {
+    -fx-border-color: red; 
+    -fx-border-style: dotted; 
+    -fx-border-width: 1;
+}
+
+.debugBackground {
+    -fx-background-color: PapayaWhip; 
+    -fx-opacity: 0.6;
+}
+
 /*
     Style from https://blogs.oracle.com/acaicedo/entry/managing_multiple_screens_in_javafx
 */

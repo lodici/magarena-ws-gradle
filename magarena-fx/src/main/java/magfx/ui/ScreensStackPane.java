@@ -40,7 +40,7 @@ public class ScreensStackPane extends StackPane {
                 + "-fx-background-position: center center; "
                 + "-fx-background-repeat: no-repeat; "
                 + "-fx-background-size: cover; "
-                + "-fx-border-color: red; -fx-border-style: dashed; "
+//                + "-fx-border-color: red; -fx-border-style: dashed; "
         );
     }
 
