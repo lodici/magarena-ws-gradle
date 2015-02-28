@@ -73,7 +73,7 @@ public final class ScreenController {
     }
 
     private static String getStageTitle() {
-        return "Magarena "
+        return "MagarenaFX "
                 .concat(MagarenaConstants.VERSION)
                 .concat(MagicSystem.isDevMode() ? " [DEV MODE]" : "")
                 .concat("  [F11 : full screen]");
