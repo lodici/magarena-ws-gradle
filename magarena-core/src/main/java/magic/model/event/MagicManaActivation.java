@@ -13,7 +13,9 @@ import java.util.List;
 import java.util.LinkedList;
 
 public abstract class MagicManaActivation implements MagicChangeCardDefinition {
-
+    
+    protected static final String ActivationRestriction = ", Activate this ability ";
+    
     private final List<MagicManaType> manaTypes;
     private final MagicCondition[] conditions;
     private final int weight;
@@ -74,8 +76,21 @@ public abstract class MagicManaActivation implements MagicChangeCardDefinition {
     }
     
     public static final MagicManaActivation create(final String costs, final List<MagicManaType> manaTypes) {
-        final List<MagicMatchedCostEvent> matchedCostEvents = MagicRegularCostEvent.build(costs);
+        final String[] part = costs.split(ActivationRestriction);
+        
+        final List<MagicMatchedCostEvent> matchedCostEvents = MagicRegularCostEvent.build(part[0]);
         assert matchedCostEvents.size() > 0;
+        
+        if (part.length > 1) {
+            matchedCostEvents.addAll(MagicConditionCostEvent.build(part[1]));
+        }
+
+        // Mana activation cost events do not have choices.
+        for (final MagicMatchedCostEvent costEvent : matchedCostEvents) {
+            if (costEvent.getEvent(MagicPermanent.NONE).hasChoice()) {
+                throw new RuntimeException("mana activation cost should not have choice: \"" + costs + "\"");
+            }
+        }
 
         return new MagicManaActivation(manaTypes) {
             @Override

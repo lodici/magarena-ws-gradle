@@ -84,7 +84,9 @@ public class MagicGame {
     private MagicPhaseType skipTurnTill = MagicPhaseType.Mulligan;
     private boolean stateCheckRequired;
     private boolean artificial;
-    private boolean fastChoices;
+    private boolean fastMana;
+    private boolean fastTarget;
+    private boolean fastBlocker;
     private boolean immediate;
     private boolean disableLog;
     private MagicPlayer visiblePlayer;
@@ -200,7 +202,9 @@ public class MagicGame {
         turnTriggers=new MagicPermanentTriggerList(triggers, game.turnTriggers);
 
         //the following are NOT copied when game state is cloned
-        //fastChoices
+        //fastMana
+        //fastTarget
+        //fastBlocker
         //immediate
         //skipTurnTill
         //mainPhaseCount
@@ -356,13 +360,36 @@ public class MagicGame {
         artificial = art;
     }
 
-    public void setFastChoices(final boolean aFastChoices) {
-        fastChoices = aFastChoices;
+    public boolean getFastMana() {
+        return fastMana;
+    }
+    
+    public boolean getFastTarget() {
+        return fastTarget;
+    }
+    
+    public boolean getFastBlocker() {
+        return fastBlocker;
     }
 
-    public boolean getFastChoices() {
-        return fastChoices;
+    public void setFastChoices(final boolean v) {
+        fastMana = v;
+        fastTarget = v;
+        fastBlocker = v;
     }
+
+    public void setFastMana(final boolean v) {
+        fastMana = v;
+    }
+
+    public void setFastTarget(final boolean v) {
+        fastTarget = v;
+    }
+
+    public void setFastBlocker(final boolean v) {
+        fastBlocker = v;
+    }
+
 
     public void setTurn(final int aTurn) {
         turn = aTurn;
