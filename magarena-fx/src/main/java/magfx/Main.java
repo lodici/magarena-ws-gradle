@@ -8,6 +8,7 @@ import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.scene.media.Media;
+import javafx.scene.media.MediaException;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import magfx.ui.ScreenController;
@@ -94,8 +95,12 @@ public class Main extends Application {
     private static void playMusic() {
         if (Boolean.getBoolean("noMusic") == false) {
             final Media media = new Media(MagicResources.getMusicFileUrl("Evening Melodrama.mp3").toString());
-            mediaPlayer = new MediaPlayer(media);
-            mediaPlayer.play();
+            try {
+                mediaPlayer = new MediaPlayer(media);
+                mediaPlayer.play();
+            } catch (MediaException ex) {
+                System.err.println("ERROR [playMusic] " + ex.getMessage());
+            }
         }
     }
 
