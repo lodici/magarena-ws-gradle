@@ -15,3 +15,9 @@ magarena-swing/release
 magarena-fx/data/mods/
 magarena-fx/data/snapshot.dat
 magarena-fx/data/
+
+.gradle
+.nb-gradle
+.nb-gradle-properties
+magarena-headless/Magarena
+magarena-swing/Magarena
